@@ -1,0 +1,47 @@
+# GitLab CI/CD Pipeline for Playwright Cucumber Tests
+
+stages:
+  - smoke
+
+.smoke_template: &smoke_template
+  image: node:20
+  before_script:
+    - npm install
+    - npx playwright install --with-deps
+  script:
+    - npm run smoke
+    - npm run report
+  artifacts:
+    paths:
+      - reports/cucumber-report.html
+    expire_in: 1 week
+
+smoke_chromium:
+  stage: smoke
+  variables:
+    BROWSER: "chromium"
+  <<: *smoke_template
+  artifacts:
+    name: "cucumber-html-report-chromium"
+    paths:
+      - reports/cucumber-report.html
+
+smoke_firefox:
+  stage: smoke
+  variables:
+    BROWSER: "firefox"
+  <<: *smoke_template
+  artifacts:
+    name: "cucumber-html-report-firefox"
+    paths:
+      - reports/cucumber-report.html
+
+smoke_webkit:
+  stage: smoke
+  variables:
+    BROWSER: "webkit"
+  <<: *smoke_template
+  artifacts:
+    name: "cucumber-html-report-webkit"
+    paths:
+      - reports/cucumber-report.html
