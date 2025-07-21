@@ -15,7 +15,19 @@ export class CustomWorld extends World {
     }
 
     async init() {
-        this.browser = await chromium.launch({
+        // Use environment variable to select browser, default to chromium
+        const browserType = process.env.BROWSER || 'chromium';
+        let browserLauncher;
+        if (browserType === 'firefox') {
+            const { firefox } = await import('playwright');
+            browserLauncher = firefox;
+        } else if (browserType === 'webkit') {
+            const { webkit } = await import('playwright');
+            browserLauncher = webkit;
+        } else {
+            browserLauncher = chromium;
+        }
+        this.browser = await browserLauncher.launch({
             headless: true,
             slowMo: 50,
             args: ['--start-maximized']
