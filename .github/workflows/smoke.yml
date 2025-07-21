@@ -16,14 +16,6 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Cache node modules
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
       - name: Install dependencies
         run: npm install
 
@@ -31,7 +23,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Cucumber Smoke Suite
-        run: npm run regression || true
+        run: npm run smoke || echo "TEST_FAILED=true" >> $GITHUB_ENV
 
       - name: Generate Cucumber HTML Report
         run: npm run report
@@ -47,3 +39,7 @@ jobs:
         with:
           name: playwright-html-report
           path: playwright-report/index.html
+      
+      - name: Mark job failed if tests failed
+        if: env.TEST_FAILED == 'true'
+        run: exit 1
