@@ -2,7 +2,7 @@ name: Playwright Cucumber Smoke Suite
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
 
 jobs:
   test:
@@ -23,7 +23,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Cucumber Smoke Suite
-        run: npm run test:regression
+        run: npm run smoke
 
       - name: Generate Cucumber HTML Report
         run: npm run report
