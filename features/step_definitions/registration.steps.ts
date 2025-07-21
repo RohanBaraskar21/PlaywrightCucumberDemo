@@ -4,13 +4,10 @@ import { expect } from '@playwright/test';
 
 
 
-Given('I navigate to the registration page', async function (this: CustomWorld) {
+Given('I navigate to the registration page', { timeout: 30000 }, async function (this: CustomWorld) {
 
     await this.page.goto('https://way2automation.com/way2auto_jquery/index.php');
     expect(this.page.url()).toBe('https://way2automation.com/way2auto_jquery/index.php');
-
-
-
 });
 
 When('I enter the name as {string}', async function (this: CustomWorld, name: string) {
