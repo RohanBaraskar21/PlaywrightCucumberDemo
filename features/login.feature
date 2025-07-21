@@ -23,7 +23,7 @@ Feature: OrangeHRM Login
       | Admin         | invalidPass   |
 
 
-      @regression
+@regression
   Scenario Outline: Invalid login credentials new
     Given I am on the OrangeHRM login page
     When I enter "<username>" and "<password>"

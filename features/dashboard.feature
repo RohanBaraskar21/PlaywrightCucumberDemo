@@ -1,3 +1,4 @@
+@regression
 Feature: OrangeHRM Dashboard
   As a logged-in user
   I want to interact with the dashboard
