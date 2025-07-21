@@ -16,7 +16,7 @@ export class CustomWorld extends World {
 
     async init() {
         this.browser = await chromium.launch({
-            headless: false,
+            headless: true,
             slowMo: 50,
             args: ['--start-maximized']
         });
