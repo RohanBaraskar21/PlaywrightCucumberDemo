@@ -1,0 +1,25 @@
+{
+  "name": "playwright-cucumber-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js features/ --require-module ts-node/register --require features/step_definitions/*.ts --require features/hooks/hooks.ts --require features/hooks/world.ts",
+    "report": "ts-node generate-report.ts",
+    "test:regression": "cmd /c \"npm run test -- --tags @regression || exit 0\" &&  npm run report",
+     "test:smoke": "cmd /c \"npm run test -- --tags @smoke || exit 0\" &&  npm run report",
+     "smoke": "npm run test -- --tags @smoke &&  npm run report",
+    "regression": "npm run test -- --tags @regression"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.3.0",
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.15.18",
+    "cucumber-html-reporter": "^6.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
