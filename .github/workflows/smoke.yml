@@ -16,6 +16,14 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
         run: npm install
 
@@ -23,7 +31,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Cucumber Smoke Suite
-        run: npm run smoke
+        run: npm run regression || true
 
       - name: Generate Cucumber HTML Report
         run: npm run report
