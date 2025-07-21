@@ -3,8 +3,6 @@ name: Playwright Cucumber Smoke Suite
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   test:
