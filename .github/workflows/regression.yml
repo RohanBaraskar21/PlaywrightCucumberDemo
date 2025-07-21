@@ -33,12 +33,6 @@ jobs:
         with:
           name: cucumber-html-report
           path: reports/cucumber-report.html
-
-      - name: Upload Playwright HTML Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-html-report
-          path: playwright-report/index.html
       
       - name: Mark job failed if tests failed
         if: env.TEST_FAILED == 'true'
